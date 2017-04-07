@@ -1,0 +1,30 @@
+//  全局样式，在不同的DPI上都能缩放
+
+body,html
+  line-height 1
+  font-weight 200
+  font-family 'PingFang SC','STHeitiSC-Light','Helevetica-Light',arial,sans-serif
+
+.clearfix
+  display inline-block
+  &:after
+    display block
+    content '.'
+    height 0
+    line-height 0
+    clear both
+    visibility hidden
+
+// DPI：1.5  缩放 1.5*0.7≈1  —— 缩放是在Y轴方向，简单来说就是厚度
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    &:after
+      -webkit-transform: scaleY(0.7)
+      transform: scaleY(0.7)
+
+// DPI：2  缩放 2*0.5≈1
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    &:after
+      -webkit-transform: scaleY(0.5)
+      transform: scaleY(0.5)
