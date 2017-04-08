@@ -13,15 +13,18 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
+
     <!-- 路由出口 -->
     <keep-alive>
       <router-view :seller="seller"></router-view>
     </keep-alive>
+    <!-- 状态保留，生命周期不会重新加载 -->
     <!-- 路由改变，刷新这部分的内容 传递seller -->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import {urlParse} from 'common/js/util';
 import header from './components/header/header.vue';
 
 const ERR_OK = 0;
@@ -34,19 +37,30 @@ export default {
   //  传递到props中也就是undefined
   data() {
     return {
-      seller: {}
+      seller: {
+        id: (() => {
+          let queryParam = urlParse();  // 得到商家的url
+          // console.log(queryParam)       id:'12345'
+          return queryParam.id;         // 得到商家的id
+        })()
+      }
     };
   },
   // 实例周期中的钩子
   created() {
-    // this 实例对象
-    this.$http.get('/api/seller').then((response) => {
+    // 从这里发送请求的id
+    this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
       // response 这里是属性，不像jQuery直接是JSON数组
       // response = response.json(); json是promise对象
       response = response.body; // 这里body是属性，而不是方法
 
       if (response.errno === ERR_OK) {
-        this.seller = response.data;
+        // this.seller = response.data; 赋值会丢掉id
+        this.seller = Object.assign({}, this.seller, response.data);
+        // (最终的结果、属性、传值)
+        // 在id的基础上给seller添加其他属性
+
+        // 对象扩展属性的方法 Object.assign()
       }
     });
   },

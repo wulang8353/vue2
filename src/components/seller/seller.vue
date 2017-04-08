@@ -28,6 +28,10 @@
             </div>
           </li>
         </ul>
+        <div class="favorite" @click="toggleFavorite">
+          <span class="icon-favorite" :class="{'active':favorite}"></span>
+          <span class="text">{{favoriteText}}</span>
+        </div>
       </div>
 
       <split></split>
@@ -71,12 +75,26 @@
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
+  import {saveToLocal, loadFromLocal} from 'common/js/store';
   import star from '../star/star.vue';
   import split from '../split/split.vue';
   export default {
     props: {    // 从路由传过来
       seller: {
         type: Object
+      }
+    },
+    data() {
+      return {
+        // 针对URL存取方案
+        favorite: (() => {
+          return loadFromLocal(this.seller.id, 'favorite', false);
+        })()
+      };
+    },
+    computed: {
+      favoriteText() {
+        return this.favorite ? '已收藏' : '收藏';
       }
     },
     created () {
@@ -86,7 +104,7 @@
       'seller'() {
         this.$nextTick(() => {
           this._initScroll();
-          // this._initPics();
+          this._initPics();
         });
       }
     },
@@ -100,6 +118,13 @@
       });
     },
     methods: {
+      toggleFavorite(event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.favorite = !this.favorite;
+        saveToLocal(this.seller.id, 'favorite', this.favorite);
+      },
       _initScroll() {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$refs.seller, {
@@ -119,7 +144,7 @@
             if (!this.picScroll) {
               this.picScroll = new BScroll(this.$refs.picWrapper, {
                 scrollX: true,   // 默认纵向滚动,使用横向滚动
-                eventPassthrough: 'vertical'  // 让外层区块纵向滚动，让内存区块横向滚动
+                eventPassthrough: 'vertical'  // 忽略垂直方向的滚动(让外层区块纵向滚动)，让内存区块横向滚动，
               });
             } else {
               this.picScroll.refresh();
@@ -146,6 +171,7 @@
     overflow hidden
     .overview
       padding 18px
+      position relative
       .title
         margin-bottom 8px
         line-height 14px
@@ -186,6 +212,24 @@
             color rgb(7,17,27)
             .stress
               font-size 24px
+      .favorite   // *********** 固定宽度
+        position absolute
+        width 50px
+        right 11px
+        top 18px
+        text-align center
+        .icon-favorite
+          display block
+          margin-bottom 4px
+          line-height 24px
+          font-size 24px
+          color #d4d6d9
+          &.active
+            color rgb(240,20,20)
+        .text
+          line-height 10px
+          font-size 10px
+          color rgb(77,85,93)
     .bulletin
       padding 18px 18px 0 18px
       .title
@@ -252,7 +296,19 @@
             height 90px
             &:last-child
               margin 0
-
-
-
+    .info
+      padding 18px 18px 0 18px
+      color rgb(7,17,27)
+      .title
+        padding-bottom 12px
+        line-height 14px
+        font-size 14px
+        border-1px(rgba(7,17,27,0.1))
+      .info-item
+        padding 16px 12px
+        line-height 16px
+        font-size 12px
+        border-1px(rgba(7,17,27,0.1))
+        &:last-child
+          border-none()
 </style>
