@@ -27,11 +27,11 @@ module.exports = {
     'semi': ['error','always'],
     // 允许有连续空行，最大不超过2行
     'no-multiple-empty-lines': ['error', {
-      max: 2,
-      maxEOF: 2,
-      maxBOF: 2
+      max: 3,
+      maxEOF: 3,
+      maxBOF: 3
     }],
-    // 缩进不需要，使用默认
+    // 缩进不需要使用默认
     'indent': 0,
     // 函数名和括号之间不需要有空格
     'space-before-function-paren': 0,
