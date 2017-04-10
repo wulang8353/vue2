@@ -25,8 +25,17 @@ Stylus，类似于SASS/SCSS，但是可以不写{}和“：”，使用起来还
 Sticky footers: 如果页面内容不够长的时候，页脚块粘贴在视窗底部；如果内容足够长时，页脚块会被内容向下推送
 
 ```
-<div class="wrapper">
+<div class="wrapper clearfix">
   <div class="main"></div>
 </div>
 <div class="close"></div>
+
+<style lang="stylus" rel="stylesheet/stylus">
+.wrapper  //  最小高度应该和窗口一样高
+  min-height 100%
+  width 100%
+  .main
+    margin-top 64px
+    padding-bottom 64px  //  内容撑开一定高度给关闭符号
+</style>
 ```
