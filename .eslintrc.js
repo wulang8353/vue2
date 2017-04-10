@@ -25,8 +25,17 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // js一直有分号
     'semi': ['error','always'],
+    // 允许有连续空行，最大不超过2行
+    'no-multiple-empty-lines': ['error', {
+      max: 2,
+      maxEOF: 2,
+      maxBOF: 2
+    }],
     // 缩进不需要，使用默认
     'indent': 0,
-    'space-before-function-paren': 0
+    // 函数名和括号之间不需要有空格
+    'space-before-function-paren': 0,
+    // 允许有未被使用的变量
+    'no-unused-vars':0
   }
 }
