@@ -63,6 +63,15 @@ export default {
         // 对象扩展属性的方法 Object.assign()
       }
     });
+
+    // 接口返回的res并不直接是返回的数据，而是经过axios本身处理过的json对象。真正的数据在res.data里
+    // axios.get('/api/seller').then((res) => {
+    //   var response = res.data;
+    //   if (response.errno === ERR_OK) {
+    //     this.seller = response.data;
+    //     console.log(this.seller);
+    //   }
+    // });
   },
 
   components: {
