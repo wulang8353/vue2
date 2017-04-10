@@ -22,8 +22,9 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'], // 可以在require引入的模块路径中补全文件后缀
     alias: {                              // 通过别名去缩短模块路径整个字符串长度
       'vue$': 'vue/dist/vue.esm.js',
+      'src': path.resolve(__dirname, '../src'),
       'common': path.resolve(__dirname, '../src/common'),
-      '@': resolve('src'),
+      'components': path.resolve(__dirname, '../src/components')
     }
   },
   module: {
