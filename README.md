@@ -35,7 +35,14 @@ Sticky footers: 如果页面内容不够长的时候，页脚块粘贴在视窗�
   min-height 100%
   width 100%
   .main
-    margin-top 64px
     padding-bottom 64px  //  内容撑开一定高度给关闭符号
+.detail-close
+  position relative
+  width 32px
+  height 32px
+  margin -64px auto 0 auto //  高度通过负值向上移动
+  clear: both              //  关键,清除浮动
+  font-size 32px
+  cursor pointer
 </style>
 ```
