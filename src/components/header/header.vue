@@ -39,7 +39,7 @@
             <div class="detail-main">
               <h1 class="name">{{seller.name}}</h1>
               <div class="star-wrapper">
-                <star :size="48" :score="seller.score"></star>
+              <star :size="48" :score="seller.score"></star>
               </div>
               <div class="title">
                 <div class="line"></div>
@@ -72,8 +72,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import star from '../star/star.vue';
-
+import star from 'components/star/star';
   export default {
     // pros属性传递值
     props: {
@@ -99,13 +98,13 @@
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
     components: {
-      star: star
+      star
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-  @import "../../common/stylus/mixin.styl"
+@import '../../common/stylus/mixin.styl';
   // font-size 0 处理inline、inline-block 之间空白符的问题
   // 影响宽高布局的放在之前，影响样式的放在之后
   .header
@@ -234,7 +233,7 @@
         transition all 0.5s ease
       &.fade-enter, &.fade-leave-active
         opacity 0
-        background rgba(7,17,27,0)
+        background rgb(7,17,27,0)
       .detail-wrapper
         //  最小高度应该和窗口一样高
         min-height 100%
@@ -250,8 +249,9 @@
           .star-wrapper
             margin-top 18px
             padding 2px 0
-            // 设置宽高是20px，实际页面上宽高是40px (48-40)/2=4，对应到手机端就是2px
+            // 设置星星的宽高是20px，实际页面上宽高是40px (48-40)/2=4，对应到手机端就是2px
             text-align center
+            // ***经典双线自适应布局***
           .title
             display flex
             //  postcss Vue插件去处理兼容性的问题

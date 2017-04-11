@@ -25,21 +25,23 @@ const CLS_OFF = 'off';
       },
       itemClasses() {  // 提供遍历数组
         let result = [];
-        let score = Math.floor(this.score * 2) / 2;
-        let hasDecimal = score % 1 !== 0;
+        let score = Math.floor(this.score * 2) / 2; // 4.2*2 =8.4 ≈ 8  4.5*2=9/2 =4.5
+        let hasDecimal = score % 1 !== 0; // 结果不为0即代表有小数，即半星
         let integer = Math.floor(score);
         //  判断多少个全星
         for (let i = 0; i < integer; i++) {
           result.push(CLS_ON);
         }
+        // 判断是否有半星
         if (hasDecimal) {
           result.push(CLS_HALF);
         }
+        // 判断有多少个空星，补齐
         while (result.length < LENGTH) {
           result.push(CLS_OFF);
         }
         return result;
-        // 数组[on,on,on,on,off]  通过遍历得到每一个值，与绑定的类名相同，找到对应的样式
+        // 数组[on,on,on,on,off]  通过遍历得到每一个值，与绑定的类名itemClass相同，找到对应的样式
       }
     }
   };
