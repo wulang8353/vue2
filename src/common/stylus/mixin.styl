@@ -6,16 +6,8 @@ border-1px($color)
     position absolute
     left 0px
     bottom 0px
-    width 100%
+    width 100%  // 设置宽度撑满
     border-top 1px solid $color
-  // &:before
-  //   content ' '
-  //   display block
-  //   position absolute
-  //   left 0px
-  //   top 0px
-  //   width 100%
-  //   border-top 1px solid $color
 
 border-none()
   &:after
@@ -23,5 +15,6 @@ border-none()
 
 bg-image($url)
     background-image url($url+"@2x.png")
+    // webpack 会将本地图片地址base64进行编译
     @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
-        background-image url($url+"@3x.png")
+      background-image url($url+"@3x.png")
