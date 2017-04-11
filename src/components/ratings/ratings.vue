@@ -69,7 +69,7 @@
   export default {
     props: {
       seller: {
-        type: Object
+        type: Object   //  <router-view :seller="seller"></router-view>
       }
     },
     data() {
@@ -145,7 +145,7 @@
     .overview
       display flex
       padding 18px 0
-      .overview-left // 针对ip5 宽度不够的情况下
+      .overview-left // 针对ip5不够的情况下: 宽度320px, 浏览器就是640px
         flex 0 0 137px
         padding 6px 0
         width 137px

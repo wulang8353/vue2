@@ -131,7 +131,7 @@ const ERR_OK = 0;
       },
 
       // 取得子组件传递来的函数add(),得到点击对象
-      // 在父组件中设置add的函数，即调用其他子组件方法，传递对象
+      // 在父组件中设置add的函数，即调用其他子组件方法show()，传递对象
       addFood(target) {
         this._drop(target);
       },

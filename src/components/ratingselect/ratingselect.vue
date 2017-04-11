@@ -46,6 +46,7 @@
     },
     computed: {
       // 修改prop中的数据，在计算属性中通过this.ratings 去处理成其他数据进行输出
+      // filter 返回是一个满足条件的数组
       postives() {
         return this.ratings.filter((rating) => {
           return rating.rateType === POSITIVE;
@@ -63,16 +64,12 @@
           return;
         }
         this.$emit('select', type);
-        // this.selectType = type;
-        // this.$reventHub.$emit('ratingtype.select', type);  // 父组件监听改事件，改变selectType
       },
       toggleContent(event) {
         if (!event._constructed) {
           return;
         }
         this.$emit('toggle');
-        // this.onlyContent = !this.onlyContent;
-        // this.$root.eventHub.$emit('content.toggle', this.onlyContent); 父组件监听改事件，改变selectType
       }
     }
   };
