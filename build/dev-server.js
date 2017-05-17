@@ -13,12 +13,12 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-var port = process.env.PORT || config.dev.port
+var port = process.env.PORT || config.dev.port // 8080
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.dev.proxyTable
+var proxyTable = config.dev.proxyTable  // 代理接口配置
 
 
 // nodeSever作用  或者  用其Router编写接口请求
@@ -54,12 +54,16 @@ apiRoutes.get('/ratings',function (req, res) {
 
 app.use('/api', apiRoutes);  // 通过  ‘/api/goods’ 即可请求到数据
 
-var compiler = webpack(webpackConfig)
+var compiler = webpack(webpackConfig) // 编译开发环境
 
+// <script src="/app.js"></script>
+// 将编译好的文件app.js放在内存中，直接通过内存访问
+// 所以看不到app.js出口文件的具体位置
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
+  publicPath: webpackConfig.output.publicPath, // '/'
   quiet: true
 })
+
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
   log: () => {}
@@ -92,6 +96,8 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 // serve pure static assets
+// 配置一个静态资源的访问路径
+// 当访问的的 '/static'时，就在static文件中去找
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 

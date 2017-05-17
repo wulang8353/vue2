@@ -12,9 +12,11 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
+    // 启动webpack-dev-server后，你在目标文件夹中是看不到编译后的文件的
     path: config.build.assetsRoot,
     filename: '[name].js', // 对应的是entry的属性-app
     publicPath: process.env.NODE_ENV === 'production'
+      // 请求的静态资源绝对路径 assetsPublicPath: '/'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
@@ -46,6 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        // include 只对下面的文件进行处理
         include: [resolve('src'), resolve('test')]
       },
       {
@@ -53,6 +56,8 @@ module.exports = {
         loader: 'url-loader',
         query: {
           limit: 10000,
+          // assetsSubDirectory ->config.dev.assetsSubDirectory = static
+          // 表达式：'static/img/[name].hash值.[类型]'
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
